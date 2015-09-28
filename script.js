@@ -2,6 +2,14 @@
 /* global: casper */
 "use strict";
 
+var LOGIN_URLS = [
+    'https://stackoverflow.com', 
+    'https://math.stackexchange.com', 
+    'https://russian.stackexchange.com',
+    'https://music.stackexchange.com',
+    'https://superuser.com',
+];
+
 phantom.casperPath = 'node_modules/casperjs';
 phantom.injectJs('node_modules/casperjs/bin/bootstrap.js');
 
@@ -13,14 +21,7 @@ var casper = require('casper').create({
     }
 });
 
-var LOGIN_URLS = [
-    'https://stackoverflow.com', 
-    'https://math.stackexchange.com', 
-    'https://russian.stackexchange.com',
-    'https://music.stackexchange.com',
-    'https://superuser.com',
-];
-    
+casper.options.waitTimeout = 5000; 
     
 var email = casper.cli.get(0);
 var password = casper.cli.get(1);
