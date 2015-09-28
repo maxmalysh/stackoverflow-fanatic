@@ -22,7 +22,7 @@ app.get('/', function(req, res) {
 
     // use event hooks to provide a callback to execute when data are available: 
     child.stdout.on('data', function(data) {
-        result += data.toString();
+        result += data.toString() + "\n";
         console.log(data.toString());
     });
 })
