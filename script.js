@@ -41,8 +41,12 @@ for(var i=0; i < LOGIN_URLS.length; i++) {
     (function(counter) {
         var LOGIN_URL = LOGIN_URLS[counter] + '/users/login';
         
+        casper.then(function(){
+            this.clear();
+            phantom.clearCookies();    
+        });
+        
         casper.thenOpen(LOGIN_URL, function () {
-            phantom.clearCookies();
             this.echo('Opening ' + LOGIN_URL);
         });
         
