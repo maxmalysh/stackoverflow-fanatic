@@ -26,7 +26,6 @@ var email = casper.cli.get(0);
 var password = casper.cli.get(1);
     
 var start = +new Date();
-var nTimes = LOGIN_URLS.length;
 
 casper.start();
 casper.echo('Today: ' + new Date());
@@ -37,15 +36,16 @@ if (!email || !password || !(/@/).test(email)) {
     casper.echo('Loading login page');
 }
 
-for(var i=0; i < nTimes; i++) { 
+for(var i=0; i < LOGIN_URLS.length; i++) { 
     (function(counter) {
         var LOGIN_URL = LOGIN_URLS[counter] + '/users/login';
         
         casper.thenOpen(LOGIN_URL, function () {
-            this.echo('Logging in to ' + LOGIN_URL);
+            this.echo('Opening' + LOGIN_URL);
         });
         
         casper.waitForSelector('#se-login-form', function() {
+            this.echo('Clicking form at ' + this.getCurrentUrl());
             this.fill('#se-login-form', {email: email, password: password}, true);
         });
         
