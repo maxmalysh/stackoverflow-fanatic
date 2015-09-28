@@ -32,7 +32,7 @@ if (!email || !password || !(/@/).test(email)) {
     casper.echo('Loading login page');
 }
     
-for (var i=0; i < nTimes; i++) {
+casper.repeat(nTimes, function(){ 
     var LOGIN_URL = LOGIN_URLS[i] + '/users/login';
     
     casper.thenOpen(LOGIN_URL, function () {
@@ -41,7 +41,7 @@ for (var i=0; i < nTimes; i++) {
         this.fill('#se-login-form', {email: email, password: password}, true);
     });
     
-    casper.wait(300);
+    casper.wait(350);
     
     casper.then(function () {
         if (this.getCurrentUrl().indexOf(LOGIN_URL) === 0) {
@@ -56,7 +56,8 @@ for (var i=0; i < nTimes; i++) {
         }
     });
     
-};
+    casper.wait(350);
+});
 
 casper.run();
 
