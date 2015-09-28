@@ -50,7 +50,7 @@ app.get('/kill', function(req, res){
     res.send("Killing process...");
     child.kill();
     processing = false;
-    lastResult += "Child process was terminated."l
+    lastResult += "Child process was terminated.";
 });
 
 app.get('/last', function(req, res) {
