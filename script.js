@@ -44,7 +44,7 @@ casper.then(function() {
                 this.fill('#se-login-form', {email: email, password: password}, true);
             });
             
-            casper.wait(500);
+            casper.wait(100);
             
             casper.then(function () {
                 if (this.getCurrentUrl().indexOf(LOGIN_URL) === 0) {
@@ -59,7 +59,7 @@ casper.then(function() {
                 }
             });
             
-            casper.wait(500);
+            casper.wait(100);
         })(i);
     };
 });
