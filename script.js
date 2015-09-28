@@ -5,11 +5,17 @@
 var LOGIN_URLS = [
     'https://stackoverflow.com', 
     'https://math.stackexchange.com', 
-    'https://russian.stackexchange.com',
-    'https://music.stackexchange.com',
     'https://superuser.com',
     'https://serverfault.com',
+    'https://askubuntu.com',
     'https://programmers.stackexchange.com',
+    'https://codereview.stackexchange.com',
+    'https://codegolf.stackexchange.com',
+    'https://music.stackexchange.com',
+    'https://russian.stackexchange.com',
+    'https://english.stackexchange.com',
+    'https://apple.stackexchange.com',
+    'https://bicycles.stackexchange.com',
 ];
 
 phantom.casperPath = 'node_modules/casperjs';
