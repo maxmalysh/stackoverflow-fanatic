@@ -50,6 +50,8 @@ for(var i=0; i < LOGIN_URLS.length; i++) {
             this.fill('#se-login-form', {email: email, password: password}, true);
         });
         
+        casper.wait(500);
+                
         casper.then(function () {
             if (this.getCurrentUrl().indexOf(LOGIN_URL) === 0) {
                 this.die('Could not log in. Check your credentials.');
@@ -62,7 +64,6 @@ for(var i=0; i < LOGIN_URLS.length; i++) {
                 });
             }
         });
-        casper.wait(500);
         
     })(i);
 };
