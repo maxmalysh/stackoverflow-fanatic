@@ -31,32 +31,37 @@ if (!email || !password || !(/@/).test(email)) {
 } else {
     casper.echo('Loading login page');
 }
+
+casper.then(function() {
     
-casper.repeat(nTimes, function(){ 
-    var LOGIN_URL = LOGIN_URLS[i] + '/users/login';
-    
-    casper.thenOpen(LOGIN_URL, function () {
-        this.echo('Logging in to ' + LOGIN_URL + ' using email address ' + email +
-            ' and password ' + (new Array(password.length + 1)).join('*'));
-        this.fill('#se-login-form', {email: email, password: password}, true);
-    });
-    
-    casper.wait(350);
-    
-    casper.then(function () {
-        if (this.getCurrentUrl().indexOf(LOGIN_URL) === 0) {
-            this.die('Could not log in. Check your credentials.');
-        } else {
-            this.echo('Clicking profile link');
-            this.click('.profile-me');
-            this.then(function () {
-                this.echo('User ' + this.getCurrentUrl().split('/').reverse()[0] + ' logged in!' +
-                    '\nTook ' + (((+new Date()) - start) / 1000) + 's');
+    for(var i=0; i < nTimes; i++) { 
+        (function(counter) {
+            var LOGIN_URL = LOGIN_URLS[counter] + '/users/login';
+            
+            casper.thenOpen(LOGIN_URL, function () {
+                this.echo('Logging in to ' + LOGIN_URL + ' using email address ' + email +
+                    ' and password ' + (new Array(password.length + 1)).join('*'));
+                this.fill('#se-login-form', {email: email, password: password}, true);
             });
-        }
-    });
-    
-    casper.wait(350);
+            
+            casper.wait(350);
+            
+            casper.then(function () {
+                if (this.getCurrentUrl().indexOf(LOGIN_URL) === 0) {
+                    this.die('Could not log in. Check your credentials.');
+                } else {
+                    this.echo('Clicking profile link');
+                    this.click('.profile-me');
+                    this.then(function () {
+                        this.echo('User ' + this.getCurrentUrl().split('/').reverse()[0] + ' logged in!' +
+                            '\nTook ' + (((+new Date()) - start) / 1000) + 's');
+                    });
+                }
+            });
+            
+            casper.wait(350);
+        })(i);
+    };
 });
 
 casper.run();
