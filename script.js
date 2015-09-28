@@ -6,10 +6,6 @@ phantom.casperPath = 'node_modules/casperjs';
 phantom.injectJs('node_modules/casperjs/bin/bootstrap.js');
 
 var LOGIN_URLS = ['https://stackoverflow.com/users/login', 'http://math.stackexchange.com/users/login'];
-var start = +new Date();
-
-var email = casper.cli.get(0);
-var password = casper.cli.get(1);
 
 for (var i=0; i < LOGIN_URLS.length; i++) {
     var LOGIN_URL = LOGIN_URLS[i];
@@ -21,6 +17,10 @@ for (var i=0; i < LOGIN_URLS.length; i++) {
             loadPlugins: false
         }
     });
+    
+    var email = casper.cli.get(0);
+    var password = casper.cli.get(1);
+    var start = +new Date();
     
     casper.echo('Today: ' + new Date());
     
