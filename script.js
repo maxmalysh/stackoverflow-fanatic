@@ -7,20 +7,20 @@ phantom.injectJs('node_modules/casperjs/bin/bootstrap.js');
 
 var LOGIN_URLS = ['https://stackoverflow.com', 'https://math.stackexchange.com', 'https://music.stackexchange.com'];
 
-var casper = require('casper').create({
-    exitOnError: true,
-    pageSettings: {
-        loadImages: false,
-        loadPlugins: false
-    }
-});
-    
-var email = casper.cli.get(0);
-var password = casper.cli.get(1);
-    
 for (var i=0; i < LOGIN_URLS.length; i++) {
     var LOGIN_URL = LOGIN_URLS[i] + '/users/login';
     var start = +new Date();
+    
+    var casper = require('casper').create({
+        exitOnError: true,
+        pageSettings: {
+            loadImages: false,
+            loadPlugins: false
+        }
+    });
+    
+    var email = casper.cli.get(0);
+    var password = casper.cli.get(1);
     
     casper.echo('Today: ' + new Date());
     
@@ -36,7 +36,7 @@ for (var i=0; i < LOGIN_URLS.length; i++) {
         this.fill('#se-login-form', {email: email, password: password}, true);
     });
     
-    casper.wait(500);
+    casper.wait(300);
     
     casper.then(function () {
         if (this.getCurrentUrl().indexOf(LOGIN_URL) === 0) {
@@ -51,5 +51,11 @@ for (var i=0; i < LOGIN_URLS.length; i++) {
         }
     });
     
-    casper.run();
+    casper.run(function() {
+        this.echo('So the whole suite ended, waiting...');
+        this.wait(500);
+        this.exit(); 
+    });
 }
+
+
