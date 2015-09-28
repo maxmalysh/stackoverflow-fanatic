@@ -10,26 +10,10 @@ var childArgs = [
 var express = require('express')
 var app = express()
 
-app.get('/', function(req, res) {
-    var result = '';
-    var child = childProcess.execFile(binPath, childArgs, function(err, stdout, stderr) {
-        console.log('stdout ', stdout);
-        console.log('stderr ', stderr);
-        console.log('err', err);
-        res.send(result);
-    })
-
-    // use event hooks to provide a callback to execute when data are available: 
-    child.stdout.on('data', function(data) {
-        result += data.toString();
-        console.log(data.toString());
-    });
-})
-
 var lastResult = "";
 var processing = false;
 
-app.get('/background', function(req, res) {
+app.get('/', function(req, res) {
     if (!processing) {
         res.send("Started processing. See results <a href=\"\/last\">here</a>");
         
