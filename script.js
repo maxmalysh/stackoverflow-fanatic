@@ -21,7 +21,7 @@ var casper = require('casper').create({
     }
 });
 
-casper.options.waitTimeout = 5000; 
+casper.options.waitTimeout = 15000; 
     
 var email = casper.cli.get(0);
 var password = casper.cli.get(1);
@@ -42,11 +42,11 @@ for(var i=0; i < LOGIN_URLS.length; i++) {
         var LOGIN_URL = LOGIN_URLS[counter] + '/users/login';
         
         casper.thenOpen(LOGIN_URL, function () {
-            this.echo('Opening' + LOGIN_URL);
+            this.echo('Opening ' + LOGIN_URL);
         });
         
+        casper.echo('Clicking form at ' + this.getCurrentUrl());
         casper.waitForSelector('#se-login-form', function() {
-            this.echo('Clicking form at ' + this.getCurrentUrl());
             this.fill('#se-login-form', {email: email, password: password}, true);
         });
         
