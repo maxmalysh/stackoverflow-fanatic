@@ -7,19 +7,19 @@ phantom.injectJs('node_modules/casperjs/bin/bootstrap.js');
 
 var LOGIN_URLS = ['https://stackoverflow.com', 'https://math.stackexchange.com', 'https://music.stackexchange.com'];
 
+var casper = require('casper').create({
+    exitOnError: true,
+    pageSettings: {
+        loadImages: false,
+        loadPlugins: false
+    }
+});
+    
+var email = casper.cli.get(0);
+var password = casper.cli.get(1);
+    
 for (var i=0; i < LOGIN_URLS.length; i++) {
     var LOGIN_URL = LOGIN_URLS[i] + '/users/login';
-    
-    var casper = require('casper').create({
-        exitOnError: true,
-        pageSettings: {
-            loadImages: false,
-            loadPlugins: false
-        }
-    });
-    
-    var email = casper.cli.get(0);
-    var password = casper.cli.get(1);
     var start = +new Date();
     
     casper.echo('Today: ' + new Date());
