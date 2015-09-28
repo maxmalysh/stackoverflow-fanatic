@@ -10,6 +10,7 @@ var childArgs = [
 var express = require('express')
 var app = express()
 
+var child;
 var processing = false;
 var lastResult = "";
 var seeResultsString = "See results <a href=\"\/last\">here</a>.";
@@ -21,7 +22,7 @@ app.get('/', function(req, res) {
         processing = true;
         lastResult = "";
         
-        var child = childProcess.execFile(binPath, childArgs, function(err, stdout, stderr) {
+        child = childProcess.execFile(binPath, childArgs, function(err, stdout, stderr) {
             console.log('stdout ', stdout);
             console.log('stderr ', stderr);
             console.log('err', err);
@@ -43,10 +44,17 @@ app.get('/', function(req, res) {
     } else {
         res.send("Already processing. " + seeResultsString);
     }
-})
+});
+
+app.get('/kill', function(req, res){
+    res.send("Killing process...");
+    child.kill();
+    processing = false;
+    lastResult += "Child process was terminated."l
+});
 
 app.get('/last', function(req, res) {
     res.send(lastResult);
-})
+});
 
 app.listen(process.env.PORT || 3000)
