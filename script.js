@@ -8,6 +8,8 @@ var LOGIN_URLS = [
     'https://russian.stackexchange.com',
     'https://music.stackexchange.com',
     'https://superuser.com',
+    'https://serverfault.com',
+    'https://programmers.stackexchange.com',
 ];
 
 phantom.casperPath = 'node_modules/casperjs';
