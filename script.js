@@ -61,7 +61,7 @@ for(var i=0; i < LOGIN_URLS.length; i++) {
                 
         casper.then(function () {
             if (this.getCurrentUrl().indexOf(LOGIN_URL) === 0) {
-                this.die('Could not log in. Check your credentials.');
+                this.die('Could not log in. Check your credentials. Reached' + this.getCurrentUrl());
             } else {
                 this.echo('Clicking profile link');
                 this.click('.profile-me');
