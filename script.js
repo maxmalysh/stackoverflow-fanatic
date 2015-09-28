@@ -14,11 +14,11 @@ var casper = require('casper').create({
 });
 
 var LOGIN_URLS = [
-    'https://math.stackexchange.com', 
-    'https://stackoverflow.com', 
+    //'https://math.stackexchange.com', 
+    //'https://stackoverflow.com', 
     'https://russian.stackexchange.com',
-    'https://music.stackexchange.com',
-    'https://superuser.com'
+    //'https://music.stackexchange.com',
+    //'https://superuser.com'
 ];
     
     
