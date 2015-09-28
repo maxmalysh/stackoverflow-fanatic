@@ -5,7 +5,7 @@
 phantom.casperPath = 'node_modules/casperjs';
 phantom.injectJs('node_modules/casperjs/bin/bootstrap.js');
 
-var LOGIN_URLS = ['https://stackoverflow.com/users/login', 'http://math.stackexchange.com/users/login'];
+var LOGIN_URLS = ['https://stackoverflow.com/users/login'];
 
 for (var i=0; i < LOGIN_URLS.length; i++) {
     var LOGIN_URL = LOGIN_URLS[i];
