@@ -17,13 +17,12 @@ app.get('/', function(req, res) {
         console.log('stdout ', stdout);
         console.log('stderr ', stderr);
         console.log('err', err);
-        res.write(result);
+        res.send(result);
     })
 
     // use event hooks to provide a callback to execute when data are available: 
     child.stdout.on('data', function(data) {
-        res.write(result);
-        //result += data.toString() + '\n';
+        result += data.toString();
         console.log(data.toString());
     });
 })
