@@ -26,7 +26,7 @@ app.get('/', function(req, res) {
             console.log('stdout ', stdout);
             console.log('stderr ', stderr);
             console.log('err', err);
-            lastResult += "Complete.";
+            lastResult += "Complete. ";
             processing = false;
         })
     
@@ -47,10 +47,11 @@ app.get('/', function(req, res) {
 });
 
 app.get('/kill', function(req, res){
-    res.send("Killing process...");
+    res.write("Killing process... ");
     child.kill();
     processing = false;
-    lastResult += "Child process was terminated.";
+    res.send("Done.");
+    lastResult += "Child process was terminated. ";
 });
 
 app.get('/last', function(req, res) {
