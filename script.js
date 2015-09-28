@@ -5,8 +5,6 @@
 phantom.casperPath = 'node_modules/casperjs';
 phantom.injectJs('node_modules/casperjs/bin/bootstrap.js');
 
-var LOGIN_URLS = ['https://math.stackexchange.com', 'https://stackoverflow.com', 'https://music.stackexchange.com'];
-    
 var casper = require('casper').create({
     exitOnError: true,
     pageSettings: {
@@ -14,12 +12,20 @@ var casper = require('casper').create({
         loadPlugins: false
     }
 });
+
+var LOGIN_URLS = [
+    'https://math.stackexchange.com', 
+    'https://stackoverflow.com', 
+    'https://music.stackexchange.com',
+    'https://russian.stackexchange.com',
+    'https://http://superuser.com'
+];
+    
     
 var email = casper.cli.get(0);
 var password = casper.cli.get(1);
     
 var start = +new Date();
-
 var i = 0;
 var nTimes = LOGIN_URLS.length;
 
@@ -32,35 +38,33 @@ if (!email || !password || !(/@/).test(email)) {
     casper.echo('Loading login page');
 }
 
-casper.then(function() {
-    
-    for(; i < nTimes;) { 
-        (function(counter) {
-            var LOGIN_URL = LOGIN_URLS[counter] + '/users/login';
-            
-            casper.thenOpen(LOGIN_URL, function () {
-                this.echo('Logging in to ' + LOGIN_URL);
-                this.fill('#se-login-form', {email: email, password: password}, true);
-            });
-            casper.wait(500);
-            
-            casper.then(function () {
-                if (this.getCurrentUrl().indexOf(LOGIN_URL) === 0) {
-                    this.die('Could not log in. Check your credentials.');
-                } else {
-                    this.echo('Clicking profile link');
-                    this.click('.profile-me');
-                    this.then(function () {
-                        this.echo('User ' + this.getCurrentUrl().split('/').reverse()[0] + ' logged in!' +
-                            '\nTook ' + (((+new Date()) - start) / 1000) + 's');
-                    });
-                }
-            });
-            casper.wait(100);
-        })(i);
-        i++;
-    };
-});
+for(; i < nTimes;) { 
+    (function(counter) {
+        var LOGIN_URL = LOGIN_URLS[counter] + '/users/login';
+        
+        casper.thenOpen(LOGIN_URL, function () {
+            this.echo('Logging in to ' + LOGIN_URL);
+            this.fill('#se-login-form', {email: email, password: password}, true);
+        });
+        casper.wait(500);
+        
+        casper.then(function () {
+            if (this.getCurrentUrl().indexOf(LOGIN_URL) === 0) {
+                this.die('Could not log in. Check your credentials.');
+            } else {
+                this.echo('Clicking profile link');
+                this.click('.profile-me');
+                this.then(function () {
+                    this.echo('User ' + this.getCurrentUrl().split('/').reverse()[0] + ' logged in!' +
+                        '\nTook ' + (((+new Date()) - start) / 1000) + 's');
+                });
+            }
+        });
+        casper.wait(100);
+        
+    })(i);
+    i++;
+};
 
 casper.run();
 
