@@ -34,6 +34,12 @@ app.get('/', function(req, res) {
             lastResult += data.toString() + "<\/br>";
             console.log(data.toString());
         });
+        
+        child.stderr.on('data', function(data) {
+            lastResult += "ERROR!" + data.toString() + "<\/br>";
+            console.log(data.toString());
+        });
+        
     } else {
         res.send("Already processing. " + seeResultsString);
     }
