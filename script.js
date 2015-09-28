@@ -39,8 +39,7 @@ casper.then(function() {
             var LOGIN_URL = LOGIN_URLS[counter] + '/users/login';
             
             casper.thenOpen(LOGIN_URL, function () {
-                this.echo('Logging in to ' + LOGIN_URL + ' using email address ' + email +
-                    ' and password ' + (new Array(password.length + 1)).join('*'));
+                this.echo('Logging in to ' + LOGIN_URL + '\n');
                 this.fill('#se-login-form', {email: email, password: password}, true);
             });
             
