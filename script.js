@@ -24,9 +24,6 @@ var i = 0;
 var nTimes = LOGIN_URLS.length;
 
 casper.start();
-casper.repeat(nTimes, function() {
-    var LOGIN_URL = LOGIN_URLS[i] + '/users/login';
-
     casper.echo('Today: ' + new Date());
     
     if (!email || !password || !(/@/).test(email)) {
@@ -34,6 +31,9 @@ casper.repeat(nTimes, function() {
     } else {
         casper.echo('Loading login page');
     }
+    
+for (var i=0; i < nTimes; i++){
+    var LOGIN_URL = LOGIN_URLS[i] + '/users/login';
     
     casper.thenOpen(LOGIN_URL, function () {
         this.echo('Logging in to ' + LOGIN_URL + ' using email address ' + email +
@@ -57,10 +57,7 @@ casper.repeat(nTimes, function() {
     });
     
     i++;
-});
+};
 
-casper.run(function() {
-    this.echo('So the whole suite ended, waiting...');
-    this.exit(); 
-});
+casper.run();
 
