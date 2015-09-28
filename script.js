@@ -14,11 +14,11 @@ var casper = require('casper').create({
 });
 
 var LOGIN_URLS = [
-    //'https://math.stackexchange.com', 
-    //'https://stackoverflow.com', 
+    'https://stackoverflow.com', 
+    'https://math.stackexchange.com', 
     'https://russian.stackexchange.com',
     'https://music.stackexchange.com',
-    //'https://superuser.com'
+    'https://superuser.com',
 ];
     
     
@@ -43,9 +43,11 @@ for(var i=0; i < nTimes; i++) {
         
         casper.thenOpen(LOGIN_URL, function () {
             this.echo('Logging in to ' + LOGIN_URL);
+        });
+        
+        casper.waitForSelector('#se-login-form', function() {
             this.fill('#se-login-form', {email: email, password: password}, true);
         });
-        casper.wait(500);
         
         casper.then(function () {
             if (this.getCurrentUrl().indexOf(LOGIN_URL) === 0) {
