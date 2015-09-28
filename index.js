@@ -31,7 +31,7 @@ var processing = false;
 
 app.get('/background', function(req, res) {
     if (!processing) {
-        res.send("Started processing. See results <a href=\"\/last\">here</a>)");
+        res.send("Started processing. See results <a href=\"\/last\">here</a>");
         
         processing = true;
         lastResult = "";
@@ -46,11 +46,11 @@ app.get('/background', function(req, res) {
     
         // use event hooks to provide a callback to execute when data are available: 
         child.stdout.on('data', function(data) {
-            lastResult += data.toString() + '\n';
+            lastResult += data.toString() + </br>;
             console.log(data.toString());
         });
     } else {
-        res.send("Already processing. See results <a href=\"\/last\">here</a>)");
+        res.send("Already processing. See results <a href=\"\/last\">here</a>");
     }
 })
 
