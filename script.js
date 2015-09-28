@@ -23,6 +23,7 @@ var start = +new Date();
 var i = 0;
 var nTimes = LOGIN_URLS.length;
 
+casper.start();
 casper.repeat(nTimes, function() {
     var LOGIN_URL = LOGIN_URLS[i] + '/users/login';
 
@@ -34,7 +35,7 @@ casper.repeat(nTimes, function() {
         casper.echo('Loading login page');
     }
     
-    casper.start(LOGIN_URL, function () {
+    casper.thenOpen(LOGIN_URL, function () {
         this.echo('Logging in to ' + LOGIN_URL + ' using email address ' + email +
             ' and password ' + (new Array(password.length + 1)).join('*'));
         this.fill('#se-login-form', {email: email, password: password}, true);
