@@ -5,7 +5,7 @@
 phantom.casperPath = 'node_modules/casperjs';
 phantom.injectJs('node_modules/casperjs/bin/bootstrap.js');
 
-var LOGIN_URLS = ['https://stackoverflow.com', 'https://math.stackexchange.com', 'https://music.stackexchange.com'];
+var LOGIN_URLS = ['https://math.stackexchange.com', 'https://stackoverflow.com', 'https://music.stackexchange.com'];
     
 var casper = require('casper').create({
     exitOnError: true,
@@ -44,7 +44,7 @@ casper.then(function() {
                 this.fill('#se-login-form', {email: email, password: password}, true);
             });
             
-            casper.wait(350);
+            casper.wait(500);
             
             casper.then(function () {
                 if (this.getCurrentUrl().indexOf(LOGIN_URL) === 0) {
@@ -59,7 +59,7 @@ casper.then(function() {
                 }
             });
             
-            casper.wait(350);
+            casper.wait(500);
         })(i);
     };
 });
