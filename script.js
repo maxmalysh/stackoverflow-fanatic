@@ -45,7 +45,7 @@ for(var i=0; i < LOGIN_URLS.length; i++) {
             this.echo('Opening ' + LOGIN_URL);
         });
         
-        casper.echo('Clicking form at ' + this.getCurrentUrl());
+        casper.echo('Clicking form at ' + casper.getCurrentUrl());
         casper.waitForSelector('#se-login-form', function() {
             this.fill('#se-login-form', {email: email, password: password}, true);
         });
