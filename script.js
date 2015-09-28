@@ -34,15 +34,14 @@ if (!email || !password || !(/@/).test(email)) {
 
 casper.then(function() {
     
-    for(var i=0; i < nTimes; i++) { 
+    for(; i < nTimes;) { 
         (function(counter) {
             var LOGIN_URL = LOGIN_URLS[counter] + '/users/login';
             
             casper.thenOpen(LOGIN_URL, function () {
-                this.echo('Logging in to ' + LOGIN_URL + '\n');
+                this.echo('Logging in to ' + LOGIN_URL);
                 this.fill('#se-login-form', {email: email, password: password}, true);
             });
-            
             casper.wait(500);
             
             casper.then(function () {
@@ -57,9 +56,9 @@ casper.then(function() {
                     });
                 }
             });
-            
             casper.wait(100);
         })(i);
+        i++;
     };
 });
 
