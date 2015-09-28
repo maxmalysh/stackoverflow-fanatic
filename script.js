@@ -45,12 +45,14 @@ for(var i=0; i < LOGIN_URLS.length; i++) {
             this.echo('Opening ' + LOGIN_URL);
         });
         
-        casper.echo('Clicking form at ' + casper.getCurrentUrl());
-        casper.waitForSelector('#se-login-form', function() {
-            this.fill('#se-login-form', {email: email, password: password}, true);
+        casper.then(function(){
+            this.echo('Clicking form at ' + casper.getCurrentUrl());
+            this.waitForSelector('#se-login-form', function() {
+                this.fill('#se-login-form', {email: email, password: password}, true);
+            });
         });
-        
-        casper.wait(500);
+    
+        //casper.wait(500);
                 
         casper.then(function () {
             if (this.getCurrentUrl().indexOf(LOGIN_URL) === 0) {
