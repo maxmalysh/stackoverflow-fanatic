@@ -59,6 +59,7 @@ for(var i=0; i < nTimes; i++) {
                 });
             }
         });
+        casper.wait(500);
         
     })(i);
 };
