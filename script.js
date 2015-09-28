@@ -44,7 +44,7 @@ casper.then(function() {
                 this.fill('#se-login-form', {email: email, password: password}, true);
             });
             
-            casper.wait(100);
+            casper.wait(500);
             
             casper.then(function () {
                 if (this.getCurrentUrl().indexOf(LOGIN_URL) === 0) {
