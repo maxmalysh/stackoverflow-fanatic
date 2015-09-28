@@ -24,15 +24,15 @@ var i = 0;
 var nTimes = LOGIN_URLS.length;
 
 casper.start();
-    casper.echo('Today: ' + new Date());
+casper.echo('Today: ' + new Date());
     
-    if (!email || !password || !(/@/).test(email)) {
-        casper.die('USAGE: casperjs stackoverflow-fanatic.js <email> <password> --ssl-protocol=any', 1);
-    } else {
-        casper.echo('Loading login page');
-    }
+if (!email || !password || !(/@/).test(email)) {
+    casper.die('USAGE: casperjs stackoverflow-fanatic.js <email> <password> --ssl-protocol=any', 1);
+} else {
+    casper.echo('Loading login page');
+}
     
-for (var i=0; i < nTimes; i++){
+for (var i=0; i < nTimes; i++) {
     var LOGIN_URL = LOGIN_URLS[i] + '/users/login';
     
     casper.thenOpen(LOGIN_URL, function () {
@@ -56,7 +56,6 @@ for (var i=0; i < nTimes; i++){
         }
     });
     
-    i++;
 };
 
 casper.run();
