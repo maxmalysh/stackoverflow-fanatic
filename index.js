@@ -40,13 +40,13 @@ app.get('/background', function(req, res) {
             console.log('stdout ', stdout);
             console.log('stderr ', stderr);
             console.log('err', err);
-            lastResult += "\nComplete.";
+            lastResult += "Complete.";
             processing = false;
         })
     
         // use event hooks to provide a callback to execute when data are available: 
         child.stdout.on('data', function(data) {
-            lastResult += data.toString() + </br>;
+            lastResult += data.toString() + "</br>";
             console.log(data.toString());
         });
     } else {
