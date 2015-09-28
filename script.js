@@ -14,11 +14,11 @@ var casper = require('casper').create({
 });
 
 var LOGIN_URLS = [
+    'https://music.stackexchange.com',
     'https://math.stackexchange.com', 
     'https://stackoverflow.com', 
-    'https://music.stackexchange.com',
     'https://russian.stackexchange.com',
-    'https://http://superuser.com'
+    'https://superuser.com'
 ];
     
     
@@ -26,7 +26,6 @@ var email = casper.cli.get(0);
 var password = casper.cli.get(1);
     
 var start = +new Date();
-var i = 0;
 var nTimes = LOGIN_URLS.length;
 
 casper.start();
@@ -38,7 +37,7 @@ if (!email || !password || !(/@/).test(email)) {
     casper.echo('Loading login page');
 }
 
-for(; i < nTimes;) { 
+for(var i=0; i < nTimes; i++) { 
     (function(counter) {
         var LOGIN_URL = LOGIN_URLS[counter] + '/users/login';
         
@@ -60,10 +59,8 @@ for(; i < nTimes;) {
                 });
             }
         });
-        casper.wait(100);
         
     })(i);
-    i++;
 };
 
 casper.run();
