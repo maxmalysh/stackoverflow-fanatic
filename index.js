@@ -22,6 +22,11 @@ app.get('/', function(req, res) {
         processing = true;
         lastResult = "";
         
+        try {
+            child.kill();
+        }
+        catch(e){   }
+        
         child = childProcess.execFile(binPath, childArgs, function(err, stdout, stderr) {
             console.log('stdout ', stdout);
             console.log('stderr ', stderr);
