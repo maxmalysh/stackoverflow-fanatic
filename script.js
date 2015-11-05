@@ -60,8 +60,8 @@ for(var i=0; i < LOGIN_URLS.length; i++) {
         
         casper.then(function(){
             this.echo('Clicking form at ' + casper.getCurrentUrl());
-            this.waitForSelector('#se-login-form', function() {
-                this.fill('#se-login-form', {email: email, password: password}, true);
+            this.waitForSelector('#login-form', function() {
+                this.fill('#login-form', {email: email, password: password}, true);
             });
         });
     
